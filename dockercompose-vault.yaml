@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  vault:
+    image: art.behsacorp.com:5000/docker/channel/baseimage/hashicorp/vault:1.20
+    container_name: vault-server
+    ports:
+      - "8200:8200"
+    volumes:
+      - ./vault-data:/vault/file
+    cap_add:
+      - IPC_LOCK
+    environment:
+      VAULT_LOCAL_CONFIG: |
+        {
+          "storage": {
+            "file": {
+              "path": "/vault/file"
+            }
+          },
+          "listener": [
+            {
+              "tcp": {
+                "address": "0.0.0.0:8200",
+                "tls_disable": true
+              }
+            }
+          ],
+          "default_lease_ttl": "168h",
+          "max_lease_ttl": "720h",
+          "ui": true
+        }
+    command: server
+    restart: unless-stopped
