@@ -52,7 +52,7 @@ _A zoomable image or table can be inserted here if needed._
 version: '3.8'
 services:
   consul:
-    image: art.behsacorp.com:5000/docker/channel/baseimage/hashicorp/consul:1.20.4
+    image: hashicorp/consul:latest
     container_name: consul
     restart: always
     volumes:
@@ -143,7 +143,7 @@ Then assign this policy to a token.
 version: '3.8'
 services:
   vault:
-    image: art.behsacorp.com:5000/docker/channel/baseimage/hashicorp/vault:1.20
+    image: hashicorp/vault:latest
     container_name: vault-server
     ports:
       - "8200:8200"
